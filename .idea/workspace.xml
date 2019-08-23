@@ -17,6 +17,9 @@
   <component name="FavoritesManager">
     <favorites_list name="gerai" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/beyondcode/laravel-dump-server" />
@@ -103,7 +106,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1P16kNgJa4SDOoRKRrvWD9P79q5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
@@ -153,24 +158,35 @@
       <workItem from="1566468675485" duration="140000" />
       <workItem from="1566468961198" duration="12057000" />
       <workItem from="1566489808314" duration="13068000" />
-      <workItem from="1566541184845" duration="8116000" />
+      <workItem from="1566541184845" duration="13443000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/users.blade.php</url>
-          <line>140</line>
+          <line>177</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/users.blade.php</url>
-          <line>207</line>
+          <line>244</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

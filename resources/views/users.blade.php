@@ -115,13 +115,50 @@
                                         <input type="text" value="" name="comment" class="comment form-control" id="comment_{{$i}}" type="text">
                                     </div>
                                 </th>
+
                             </tr>
                         @endfor
+
                         @break
+
                     @endforeach
+
                     <div class="form-group">
                         <input type="hidden" value="{{$id}}" class="form-control" id="id" type="text">
                     </div>
+
+                </table>
+
+
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th scope="col">Monthly Working Days</th>
+                        <th scope="col">Monthly Working Hours</th>
+                        <th scope="col">Monthly Sick Leave</th>
+                        <th scope="col">Monthly Vacation Days</th>
+                        <th scope="col">Monthly Vacation Days</th>
+                        <th scope="col">Monthly Overtime Hours</th>
+                        <th scope="col">Holidays and Non-working days</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <th scope="row">X</th>
+                        <th scope="row">X</th>
+                        <th scope="row">X</th>
+                        <th scope="row">X</th>
+                        <th scope="row">X</th>
+                        <th scope="row">X</th>
+                        <th scope="row">X</th>
+                    </tr>
+
+                    </tbody>
+
+
                 </table>
                 <button type="submit" id="submitForm"  style="float: right"  class="btn btn-primary btn-lg btn-block">MƏLUMATLARI YENİLƏ</button>
             </div>
