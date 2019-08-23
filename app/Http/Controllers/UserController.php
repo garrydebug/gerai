@@ -24,7 +24,7 @@ class UserController extends Controller
 	{
 		$infos = info::where("user_id",$request->user_id)->where("month_id",$request->month_id)
             ->select("info_id","day","year","comment","tag","hours")->get();
-        $overall1 = info::select(DB::raw("SUM(day) as overall"))->where('month_id',$request->month_id)->where('user_id',$request->user_id)->where('tag','R')->get();
+/*        $overall1 = info::select(DB::raw("SUM(hours) as overall"))->where('month_id',$request->month_id)->where('user_id',$request->user_id)->where('tag','R')->get();*/
         return response()->json($infos);
 	}
 
@@ -35,8 +35,6 @@ class UserController extends Controller
             $status=$edit[1];
             $comment=$edit[2];
             $hours=$edit[3];
-
-
             info::where('info_id','=',$id)->update(['tag' => $status,'comment' => $comment,'hours' => $hours]);
         }
 
