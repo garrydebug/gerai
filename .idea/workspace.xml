@@ -158,7 +158,9 @@
       <workItem from="1566468675485" duration="140000" />
       <workItem from="1566468961198" duration="12057000" />
       <workItem from="1566489808314" duration="13068000" />
-      <workItem from="1566541184845" duration="17826000" />
+      <workItem from="1566541184845" duration="17858000" />
+      <workItem from="1566590223543" duration="188000" />
+      <workItem from="1566732055869" duration="11791000" />
     </task>
     <servers />
   </component>
@@ -170,7 +172,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -181,12 +185,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/users.blade.php</url>
-          <line>177</line>
+          <line>175</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/users.blade.php</url>
-          <line>244</line>
+          <line>292</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

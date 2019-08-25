@@ -135,11 +135,10 @@
                     <tr>
                         <th scope="col">Monthly Working Days</th>
                         <th scope="col">Monthly Working Hours</th>
-                        <th scope="col">Monthly Sick Leave</th>
-                        <th scope="col">Monthly Vacation Days</th>
+                        <th scope="col">Monthly <br>Sick Leave Days</th>
                         <th scope="col">Monthly Vacation Days</th>
                         <th scope="col">Monthly Overtime Hours</th>
-                        <th scope="col">Holidays and Non-working days</th>
+                        <th scope="col">Monthly Holidays and Non-working days</th>
 
 
                     </tr>
@@ -147,13 +146,12 @@
                     <tbody>
 
                     <tr>
-                        <th scope="row">X</th>
-                        <th scope="row">X</th>
-                        <th scope="row">X</th>
-                        <th scope="row">X</th>
-                        <th scope="row">X</th>
-                        <th scope="row">X</th>
-                        <th scope="row">X</th>
+                        <th scope="row"><input class="form-control" id="regularCount" type="text"></th>
+                        <th scope="row"><input class="form-control" id="regularHoursCount" type="text"></th>
+                        <th scope="row"><input class="form-control" id="sickCount" type="text"></th>
+                        <th scope="row"><input class="form-control" id="vacationCount" type="text"></th>
+                        <th scope="row"><input class="form-control" id="overtimeCount" type="text"></th>
+                        <th scope="row"><input class="form-control" id="hAndnDaysCount" type="text"></th>
                     </tr>
 
                     </tbody>
@@ -178,10 +176,22 @@
         $(document).ready(function () {
 
             jQuery(function($) {
+
                 $('#user').on('change', function() {
                         var monthID = $('#id').val();
                         var userID = $("#user").val();
-                        $.ajax({
+                        var regularCount=0;
+                        var sickCount=0;
+                        var vacationCount=0;
+                        var hAndnDaysCount=0;
+
+
+
+
+
+
+
+                    $.ajax({
                             url: '{{url('get-info')}}',
                             type: "POST",
                             dataType: "json",
@@ -195,6 +205,7 @@
                                 if (data) {
                                     $('input[name=tag]').empty();
                                     $.each(data, function (key, value) {
+
                                         $('#info_id_' + value['day']).val(value['info_id']);
                                         $('#tag_' + value['day']).val(value['tag']);
                                         $('#hours_' + value['day']).val(value['hours']);
@@ -203,8 +214,10 @@
                                         jQuery(function($) {
                                             $('#tag_'+ value['day']).on('change', function() {
                                                 if ($('#tag_'+ value['day']).val()=='R'){
-                                                    $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="8">8 hours</option>')
+                                                    $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="8">8 hours</option>');
+
                                                 }
+
                                                 else if ($('#tag_'+ value['day']).val()=='R/'){
                                                     $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="7">7 hours</option>')
                                                 }
@@ -228,7 +241,42 @@
                                                 }}).trigger('change');
                                         });
 
+
+                                        if ($('#tag_'+ value['day']).val()=='R' || $('#tag_'+ value['day']).val()=='R/' ){
+                                                regularCount=regularCount+1;
+                                        }
+                                        else if ($('#tag_'+ value['day']).val()=='S'){
+                                            sickCount=sickCount+1;
+                                        }
+                                        else if ($('#tag_'+ value['day']).val()=='S'){
+                                            vacationCount=vacationCount+1;
+                                        }
+                                        else if ($('#tag_'+ value['day']).val()=='H' || $('#tag_'+ value['day']).val()=='W'  ){
+                                            hAndnDaysCount=hAndnDaysCount+1;
+                                        }
+
+
+
+
+
+
+
+
+
+
+
                                     });
+                                    $('#regularCount').val(regularCount);
+                                    $('#sickCount').val(sickCount);
+                                    $('#vacationCount').val(vacationCount);
+                                    $('#hAndnDaysCount').val(hAndnDaysCount);
+
+
+
+
+
+
+
 
                                 } else {
                                     $('input[name=tag]').empty();
@@ -236,8 +284,8 @@
 
 
  },
-                        });
 
+                        });
 
                 }).trigger('change');
             });
@@ -279,3 +327,5 @@
 
     </script>
 @endsection
+
+
