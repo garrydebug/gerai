@@ -146,12 +146,12 @@
                     <tbody>
 
                     <tr>
-                        <th scope="row"><input  class="form-control" id="regularCount" type="text"></th>
-                        <th scope="row"><input class="form-control" id="regularHoursCount" type="text"></th>
-                        <th scope="row"><input class="form-control" id="sickCount" type="text"></th>
-                        <th scope="row"><input class="form-control" id="vacationCount" type="text"></th>
+                        <th scope="row"><input disabled  class="form-control" id="regularCount" type="text"></th>
+                        <th scope="row"><input disabled   class="form-control" id="regularHoursCount" type="text"></th>
+                        <th scope="row"><input disabled   class="form-control" id="sickCount" type="text"></th>
+                        <th scope="row"><input disabled   class="form-control" id="vacationCount" type="text"></th>
                         <th scope="row"><input disabled min="0" class="form-control" id="overtimeCount" type="number"></th>
-                        <th scope="row"><input class="form-control" id="hAndnDaysCount" type="text"></th>
+                        <th scope="row"><input disabled   class="form-control" id="hAndnDaysCount" type="text"></th>
                     </tr>
 
                     </tbody>
@@ -178,7 +178,8 @@
             jQuery(function($) {
 
                 $('#user').on('change', function() {
-                        var monthID = $('#id').val();
+                    var n=0;
+                    var monthID = $('#id').val();
                         var userID = $("#user").val();
                         var regularCount=0;
                         var regularPCount=0;
@@ -211,32 +212,11 @@
                                         $('#comment_' + value['day']).val(value['comment']);
 
                                         jQuery(function($) {
-                                            var sel =  $('#tag_'+ value['day']);
-                                            sel.data("prev",sel.val());
-
                                             $('#tag_'+ value['day']).on('change', function() {
                                                 var jqThis = $(this);
 
                                                 if ($('#tag_'+ value['day']).val()=='R'){
-                                                    if (jqThis.data("prev")=='S'){
-                                                        var a= parseInt($('#sickCount').val())-1 ;
-                                                        $('#sickCount').val('');
-
-                                                        console.log( $('#sickCount').val());
-                                                        $('#sickCount').val();
-
-
-
-                                                    }
-
-
-
-
                                                     regularCount=regularCount+1;
-                                                    overtimeHoursCount=overtimeHoursCount-$('#hours_'+ value['day']).val();
-
-
-
                                                     $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="8">8 hours</option>');
                                                     if ( $('#hours_'+ value['day']).val()=='8') {
                                                         regularHoursCount=regularHoursCount+1;
@@ -246,12 +226,6 @@
 
                                                 else if ($('#tag_'+ value['day']).val()=='R/'){
                                                     regularPCount=regularPCount+1;
-                                                    overtimeHoursCount=overtimeHoursCount-$('#hours_'+ value['day']).val();
-                                                    if (($('#tag_'+ value['day']).val()=='S'))
-                                                    {
-                                                        $('#sickCount').val()-1;
-
-                                                    }
                                                     $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="7">7 hours</option>')
                                                     if ( $('#hours_'+ value['day']).val()=='7') {
 
@@ -260,12 +234,10 @@
                                                 }
                                                 else if ($('#tag_'+ value['day']).val()=='W' ){
                                                     wDaysCount=wDaysCount+1;
-                                                    overtimeHoursCount=overtimeHoursCount-$('#hours_'+ value['day']).val();
                                                     $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="0">0 hours</option>')
                                                 }
                                                 else if ($('#tag_'+ value['day']).val()=='H' ){
                                                     hDaysCount=hDaysCount+1;
-                                                    overtimeHoursCount=overtimeHoursCount-$('#hours_'+ value['day']).val();
                                                     $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="0">0 hours</option>')
                                                 }
                                                 else if ($('#tag_'+ value['day']).val()=='S' ){
@@ -277,30 +249,44 @@
                                                     $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="0">0 hours</option>')
                                                 }
                                                 else if ($('#tag_'+ value['day']).val()=='O'  ){
+
+
                                                     $('#hours_'+ value['day']).empty();
 
                                                     for (var i = 1; i <= 24; i++) {
-                                                        $('#hours_'+ value['day']).prop( "disabled", false ).append('<option  value="'+i+'">'+i+' hours</option>').val(value['hours']);
-                                                        if ( $('#hours_'+ value['day']).val()==i) {
 
-                                                            overtimeHoursCount=overtimeHoursCount+i;
-                                                        }
+                                                        $('#hours_'+ value['day']).prop( "disabled", false ).append('<option  value="'+i+'">'+i+' hours</option>').val(value['hours']);
+
                                                     }
+                                                    n=n+parseInt($('#hours_'+ value['day']).val());
+
 
 
 
                                                 }
-                                                $('#regularCount').val(regularCount+regularPCount);
-                                                $('#sickCount').val(sickCount);
-                                                $('#vacationCount').val(vacationCount);
-                                                $('#hAndnDaysCount').val(hDaysCount+wDaysCount);
-                                                $('#regularHoursCount').val(regularHoursCount*8+regularPHoursCount*7);
-                                                $('#overtimeCount').val(overtimeHoursCount);
+
+
+
+
 
 
 
                                             }).trigger('change');
+
+
+
+
+
+                                            $('#regularCount').val(regularCount+regularPCount);
+                                            $('#sickCount').val(sickCount);
+                                            $('#vacationCount').val(vacationCount);
+                                            $('#hAndnDaysCount').val(hDaysCount+wDaysCount);
+                                            $('#regularHoursCount').val(regularHoursCount*8+regularPHoursCount*7);
+                                            $('#overtimeCount').val(n);
+
+
                                         });
+
 
 
                                     });
@@ -313,6 +299,8 @@
                             },
 
                         });
+
+
 
                 }).trigger('change');
             });
@@ -340,7 +328,7 @@
                     type: "POST",
                     data: {"_token": "{{ csrf_token() }}", "edits": edits/*, "yenis": yenis*/},
                     success: function (data) {
-                        $(window).scrollTop(0);
+                        location.reload();
                         alert('yeniləndi');
                     }
                 });
