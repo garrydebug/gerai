@@ -213,7 +213,6 @@
                                         jQuery(function($) {
                                             var sel =  $('#tag_'+ value['day']);
                                             sel.data("prev",sel.val());
-                                            $('#sickCount').empty();
 
                                             $('#tag_'+ value['day']).on('change', function() {
                                                 var jqThis = $(this);
@@ -221,8 +220,12 @@
                                                 if ($('#tag_'+ value['day']).val()=='R'){
                                                     if (jqThis.data("prev")=='S'){
                                                         var a= parseInt($('#sickCount').val())-1 ;
-                                                        console.log(a);
-                                                        $('#sickCount').val(a);
+                                                        $('#sickCount').val('');
+
+                                                        console.log( $('#sickCount').val());
+                                                        $('#sickCount').val();
+
+
 
                                                     }
 
