@@ -130,11 +130,19 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.users.blade.php">
+    <configuration name="users.blade.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/gerai/resources/views/users.blade.php" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.users.blade.php" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -160,7 +168,8 @@
       <workItem from="1566489808314" duration="13068000" />
       <workItem from="1566541184845" duration="17858000" />
       <workItem from="1566590223543" duration="188000" />
-      <workItem from="1566732055869" duration="11791000" />
+      <workItem from="1566732055869" duration="11822000" />
+      <workItem from="1566796457637" duration="10201000" />
     </task>
     <servers />
   </component>
@@ -190,7 +199,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/users.blade.php</url>
-          <line>292</line>
+          <line>316</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

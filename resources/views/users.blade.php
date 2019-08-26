@@ -146,11 +146,11 @@
                     <tbody>
 
                     <tr>
-                        <th scope="row"><input class="form-control" id="regularCount" type="text"></th>
+                        <th scope="row"><input  class="form-control" id="regularCount" type="text"></th>
                         <th scope="row"><input class="form-control" id="regularHoursCount" type="text"></th>
                         <th scope="row"><input class="form-control" id="sickCount" type="text"></th>
                         <th scope="row"><input class="form-control" id="vacationCount" type="text"></th>
-                        <th scope="row"><input class="form-control" id="overtimeCount" type="text"></th>
+                        <th scope="row"><input disabled min="0" class="form-control" id="overtimeCount" type="number"></th>
                         <th scope="row"><input class="form-control" id="hAndnDaysCount" type="text"></th>
                     </tr>
 
@@ -181,16 +181,14 @@
                         var monthID = $('#id').val();
                         var userID = $("#user").val();
                         var regularCount=0;
+                        var regularPCount=0;
                         var sickCount=0;
                         var vacationCount=0;
-                        var hAndnDaysCount=0;
-
-
-
-
-
-
-
+                        var hDaysCount=0;
+                        var wDaysCount=0;
+                        var regularHoursCount=0;
+                        var regularPHoursCount=0;
+                        var overtimeHoursCount=0;
                     $.ajax({
                             url: '{{url('get-info')}}',
                             type: "POST",
@@ -202,6 +200,7 @@
                                 $('.comment').val('');
                                 $('.hours').val('');
 
+
                                 if (data) {
                                     $('input[name=tag]').empty();
                                     $.each(data, function (key, value) {
@@ -212,78 +211,103 @@
                                         $('#comment_' + value['day']).val(value['comment']);
 
                                         jQuery(function($) {
+                                            var sel =  $('#tag_'+ value['day']);
+                                            sel.data("prev",sel.val());
+                                            $('#sickCount').empty();
+
                                             $('#tag_'+ value['day']).on('change', function() {
+                                                var jqThis = $(this);
+
                                                 if ($('#tag_'+ value['day']).val()=='R'){
+                                                    if (jqThis.data("prev")=='S'){
+                                                        var a= parseInt($('#sickCount').val())-1 ;
+                                                        console.log(a);
+                                                        $('#sickCount').val(a);
+
+                                                    }
+
+
+
+
+                                                    regularCount=regularCount+1;
+                                                    overtimeHoursCount=overtimeHoursCount-$('#hours_'+ value['day']).val();
+
+
+
                                                     $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="8">8 hours</option>');
+                                                    if ( $('#hours_'+ value['day']).val()=='8') {
+                                                        regularHoursCount=regularHoursCount+1;
+                                                    }
 
                                                 }
 
                                                 else if ($('#tag_'+ value['day']).val()=='R/'){
+                                                    regularPCount=regularPCount+1;
+                                                    overtimeHoursCount=overtimeHoursCount-$('#hours_'+ value['day']).val();
+                                                    if (($('#tag_'+ value['day']).val()=='S'))
+                                                    {
+                                                        $('#sickCount').val()-1;
+
+                                                    }
                                                     $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="7">7 hours</option>')
+                                                    if ( $('#hours_'+ value['day']).val()=='7') {
+
+                                                        regularPHoursCount=regularPHoursCount+1;
+                                                    }
                                                 }
                                                 else if ($('#tag_'+ value['day']).val()=='W' ){
+                                                    wDaysCount=wDaysCount+1;
+                                                    overtimeHoursCount=overtimeHoursCount-$('#hours_'+ value['day']).val();
                                                     $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="0">0 hours</option>')
                                                 }
                                                 else if ($('#tag_'+ value['day']).val()=='H' ){
+                                                    hDaysCount=hDaysCount+1;
+                                                    overtimeHoursCount=overtimeHoursCount-$('#hours_'+ value['day']).val();
                                                     $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="0">0 hours</option>')
                                                 }
                                                 else if ($('#tag_'+ value['day']).val()=='S' ){
+                                                    sickCount=sickCount+1;
                                                     $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="0">0 hours</option>')
                                                 }
                                                 else if ($('#tag_'+ value['day']).val()=='V' ){
+                                                    vacationCount=vacationCount+1;
                                                     $('#hours_'+ value['day']).prop( "disabled", true ).empty().append('<option selected="selected" value="0">0 hours</option>')
                                                 }
                                                 else if ($('#tag_'+ value['day']).val()=='O'  ){
                                                     $('#hours_'+ value['day']).empty();
+
                                                     for (var i = 1; i <= 24; i++) {
                                                         $('#hours_'+ value['day']).prop( "disabled", false ).append('<option  value="'+i+'">'+i+' hours</option>').val(value['hours']);
+                                                        if ( $('#hours_'+ value['day']).val()==i) {
+
+                                                            overtimeHoursCount=overtimeHoursCount+i;
+                                                        }
                                                     }
-                                                }}).trigger('change');
+
+
+
+                                                }
+                                                $('#regularCount').val(regularCount+regularPCount);
+                                                $('#sickCount').val(sickCount);
+                                                $('#vacationCount').val(vacationCount);
+                                                $('#hAndnDaysCount').val(hDaysCount+wDaysCount);
+                                                $('#regularHoursCount').val(regularHoursCount*8+regularPHoursCount*7);
+                                                $('#overtimeCount').val(overtimeHoursCount);
+
+
+
+                                            }).trigger('change');
                                         });
 
 
-                                        if ($('#tag_'+ value['day']).val()=='R' || $('#tag_'+ value['day']).val()=='R/' ){
-                                                regularCount=regularCount+1;
-                                        }
-                                        else if ($('#tag_'+ value['day']).val()=='S'){
-                                            sickCount=sickCount+1;
-                                        }
-                                        else if ($('#tag_'+ value['day']).val()=='S'){
-                                            vacationCount=vacationCount+1;
-                                        }
-                                        else if ($('#tag_'+ value['day']).val()=='H' || $('#tag_'+ value['day']).val()=='W'  ){
-                                            hAndnDaysCount=hAndnDaysCount+1;
-                                        }
-
-
-
-
-
-
-
-
-
-
-
                                     });
-                                    $('#regularCount').val(regularCount);
-                                    $('#sickCount').val(sickCount);
-                                    $('#vacationCount').val(vacationCount);
-                                    $('#hAndnDaysCount').val(hAndnDaysCount);
-
-
-
-
-
 
 
 
                                 } else {
                                     $('input[name=tag]').empty();
                                 }
-
-
- },
+                            },
 
                         });
 
