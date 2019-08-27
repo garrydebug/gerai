@@ -258,31 +258,19 @@
                                                         $('#hours_'+ value['day']).prop( "disabled", false ).append('<option  value="'+i+'">'+i+' hours</option>').val(value['hours']);
 
                                                     }
-                                                    n=n+parseInt($('#hours_'+ value['day']).val());
-
-
+                                                   overtimeHoursCount=overtimeHoursCount+parseInt($('#hours_'+ value['day']).val());
 
 
                                                 }
 
-
-
-
-
-
-
                                             }).trigger('change');
-
-
-
-
 
                                             $('#regularCount').val(regularCount+regularPCount);
                                             $('#sickCount').val(sickCount);
                                             $('#vacationCount').val(vacationCount);
                                             $('#hAndnDaysCount').val(hDaysCount+wDaysCount);
                                             $('#regularHoursCount').val(regularHoursCount*8+regularPHoursCount*7);
-                                            $('#overtimeCount').val(n);
+                                            $('#overtimeCount').val(overtimeHoursCount);
 
 
                                         });
@@ -290,7 +278,6 @@
 
 
                                     });
-
 
 
                                 } else {
@@ -329,7 +316,7 @@
                     data: {"_token": "{{ csrf_token() }}", "edits": edits/*, "yenis": yenis*/},
                     success: function (data) {
                         location.reload();
-                        alert('yeniləndi');
+                        alert('MƏLUMATLAR YENİLƏNDİ!');
                     }
                 });
             });
